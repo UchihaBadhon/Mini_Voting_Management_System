@@ -5,6 +5,7 @@ In this project,there have both admin and user panel. To use this system, Candid
 adminpanel:
 
 username: Admin
+
 password: a1234
 
 There is no need to press enter while typing password as it is masked. Then Voters list should be added.
@@ -12,4 +13,5 @@ There is no need to press enter while typing password as it is masked. Then Vote
 In userpanel:
 
 username: Citizen
+
 password: 1234 (Need to press enter here after typing password).
