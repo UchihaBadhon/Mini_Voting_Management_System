@@ -1,0 +1,141 @@
+#include <stdio.h>
+
+int isdigit(char ch)
+{
+    return (ch >= '0' && ch <= '9');
+}
+
+int isalpha(char ch)
+{
+    return ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'));
+}
+
+int strEqual(char a[], char b[])
+{
+    int i = 0;
+    while (a[i] != '\0' && b[i] != '\0')
+    {
+        if (a[i] != b[i])
+        {
+            return 0;
+        }
+
+        i++;
+    }
+    return (a[i] == '\0' && b[i] == '\0');
+}
+
+int strLength(char a[])
+{
+    int len = 0;
+    while (a[len] != '\0') len++;
+    return len;
+}
+
+int isOperator(char ch[])
+{
+    char ops[5][2] = {{'+','\0'}, {'-','\0'}, {'*','\0'}, {'/','\0'}, {'%','\0'}};
+    for (int i = 0; i < 5; i++)
+    {
+        if (strEqual(ch, ops[i]))
+            return 1;
+    }
+    return 0;
+}
+
+int isParenthesis(char ch[])
+{
+    char left[2] = {'(', '\0'};
+    char right[2] = {')', '\0'};
+    return (strEqual(ch, left) || strEqual(ch, right));
+}
+
+int isNumber(char ch[])
+{
+    if (strLength(ch) == 0)
+        return 0;
+    for (int i = 0; ch[i] != '\0'; i++)
+    {
+        if (!isdigit(ch[i]))
+            return 0;
+    }
+    return 1;
+}
+
+int isIdentifier(char ch[])
+{
+    return (strLength(ch) == 1 && isalpha(ch[0]));
+}
+
+int main()
+{
+    char ch[500];
+    printf("Input: ");
+    scanf("%[^\n]", ch);
+
+    char tokens[100][50];
+    int row = 0, col = 0;
+
+    for (int i = 0; ch[i] != '\0'; i++)
+    {
+        if (ch[i] == ' ' || ch[i] == '\t')
+        {
+            if (col > 0)
+            {
+                tokens[row][col] = '\0';
+                row++;
+                col = 0;
+            }
+        }
+        else if (ch[i] == '(' || ch[i] == ')' || ch[i] == '+' || ch[i] == '-' || ch[i] == '*' || ch[i] == '/' || ch[i] == '%')
+        {
+            if (col > 0)
+            {
+                tokens[row][col] = '\0';
+                row++;
+                col = 0;
+            }
+            tokens[row][0] = ch[i];
+            tokens[row][1] = '\0';
+            row++;
+        }
+        else
+        {
+            tokens[row][col++] = ch[i];
+        }
+    }
+    if (col > 0)
+    {
+        tokens[row][col] = '\0';
+        row++;
+    }
+
+    for (int i = 0; i < row; i++)
+    {
+        if (isIdentifier(tokens[i]))
+        {
+            printf("IDENTIFIER: %s\n", tokens[i]);
+        }
+        else if (isNumber(tokens[i]))
+        {
+            printf("NUMBER: %s\n", tokens[i]);
+        }
+        else if (isOperator(tokens[i]))
+        {
+            printf("OPERATOR: %s\n", tokens[i]);
+        }
+        else if (isParenthesis(tokens[i]))
+        {
+            printf("PARENTHESIS: %s\n", tokens[i]);
+        }
+        else
+        {
+            printf("INVALID: %s\n", tokens[i]);
+        }
+    }
+
+    return 0;
+
+
+
+}
