@@ -52,6 +52,7 @@ int identifier( char ch[] ){
 int main()
 {
     char ch[500];
+    printf("Enter a sentence of a code: ");
     gets(ch);
 
     int check = 0;
