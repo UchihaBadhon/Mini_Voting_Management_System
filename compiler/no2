@@ -36,9 +36,22 @@ char temp[8][50] = {"int", "if", "while", "return", "else", "for", "float", "cha
 
 }
 
+int identifier( char ch[] ){
+    int i = 0;
+    while( ch[i] != '\0' ){
+        if( (ch[i] >= 'a' && ch[i] <= 'z') || (ch[i] >= 'a' && ch[i] <= 'z') ){
+            i++;
+        }
+        else{
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int main()
 {
-    char ch[100];
+    char ch[500];
     gets(ch);
 
     int check = 0;
@@ -76,15 +89,13 @@ int main()
     if( keyword(temp2[i])){
         printf( "%s : keyword\n", temp2[i]);
     }
-    
+    else if( identifier(temp2[i]) ){
+        printf( "%s : Identifier\n", temp2[i]);
+    }
+    else{
+        printf( "%s : (Not classified as keyword or identifier)\n", temp2[i]);
+    }
+
    }
 
-
-
-
-
-
 }
-
-
-
