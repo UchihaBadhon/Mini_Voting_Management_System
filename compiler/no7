@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int strLength(char str[]) {
+    int len = 0;
+    while (str[len] != '\0') len++;
+    return len;
+}
+
+
+
+int matchesPattern(char str[]) {
+    int len = strLength(str);
+    if (len < 3){
+       return 0;
+    }
+
+    if (str[len - 2] != 'b'){
+         return 0;
+    }
+
+    int b_Count = 0;
+    for (int i = 0; i < len; i++) {
+        if (str[i] == 'b'){
+            b_Count++;
+        }
+    }
+    if (b_Count < 2){
+        return 0;
+    }
+
+    return 1;
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string to check against the regex: ");
+    scanf("%s", str);
+
+    if (matchesPattern(str))
+        printf("'%s' MATCHES the regular expression.\n", str);
+    else
+        printf("'%s' DOES NOT MATCH the regular expression.\n", str);
+
+    return 0;
+}
+
+
+
