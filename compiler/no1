@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<string.h>
-//Write a C program that will take multiple lines as input and count the number of lines.
 int main()
 {
     char ch[100];
+    printf("Enter the string: ");
     gets(ch);
     char temp[4][50] = {"int", "if", "while", "return"};
     int check = 0;
